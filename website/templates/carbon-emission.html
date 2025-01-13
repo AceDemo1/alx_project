@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Carbon Emission Calculator{% endblock %}
+{% block content %}
+<div class="carbon-calculator calculator">
+    <h2>Calculate Your Carbon Emission</h2>
+    <form method="POST" action="{{ url_for('views.carbon_emission') }}">
+        <label for="transportation">Transportation (km traveled per week):</label>
+        <input type="number" name="transportation" id="transportation" step="0.1" placeholder="Enter kilometers">
+
+        <label for="energy">Energy Consumption (kWh per month):</label>
+        <input type="number" name="energy" id="energy" step="0.1" placeholder="Enter kWh">
+
+        <label for="diet">Diet Type:</label>
+        <select name="diet" id="diet">
+            <option value="vegan">Vegan</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="omnivore">Omnivore</option>
+        </select>
+
+        <label for="waste">Waste Generated (kg per week):</label>
+        <input type="number" name="waste" id="waste" step="0.1" placeholder="Enter kilograms">
+
+        <button type="submit">Calculate</button>
+    </form>
+    {% if total_emission is not none %}
+        <div class="result">
+            <strong>Your Total Emission:</strong> {{ total_emission }} kg CO₂ per year
+        </div>
+    {% endif %}
+</div>
+
+{% if total_emission is not none %}
+<div class="suggestions">
+    <h3>Tips to Reduce Your Carbon Emission</h3>
+    <ul id="suggestions">
+        {% if transportation and transportation|int > 1000 %}
+            <li>Consider carpooling or using public transport.</li>
+        {% endif %}
+        {% if energy and energy|int > 2000 %}
+            <li>Switch to energy-efficient appliances.</li>
+        {% endif %}
+        {% if diet and diet == 'omnivore' %}
+            <li>Try incorporating more plant-based meals into your diet.</li>
+        {% endif %}
+        {% if waste and waste|int > 500 %}
+            <li>Practice recycling and waste reduction strategies.</li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
+
+<p>
+    <a href="{{ url_for('views.carbon_history') }}" class="history-link">View Your Carbon Emission History</a>
+</p>
+{% endblock %}

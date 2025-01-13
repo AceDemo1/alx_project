@@ -6,22 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}App{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <nav>
             <ul>
+                {% if user.is_authenticated %}
                 <li><a href="{{ url_for('views.home') }}">Home</a></li>
+                <li><a href="{{ url_for('views.notes') }}">My Notes</a></li>
+                <li><a href="{{ url_for('views.cal') }}">Calculator</a></li>
+                <li><a href="{{ url_for('views.carbon_emission') }}">Carbon-Emission Calculator</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                 <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
+                {% endif %}                
             </ul>
         </nav>
     </header>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash-message {{ category }}">
+            <span class="message-content">{{ message }}</span>
+            <button class="close-btn" aria-label="Close" onclick="dismissFlashMessage(event)">×</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    
     <main>
         {% block content %}
         {% endblock %}
     </main>
+    
+    <script
+        type="text/javascript"
+        src="{{ url_for('static', filename='flash_msg.js') }}">
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Carbon Emission History{% endblock %}
+{% block content %}
+<div class="carbon-history">
+    <h2>Your Carbon Emission History</h2>
+    {% if emissions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Transportation (kg CO₂/year)</th>
+                    <th>Energy (kg CO₂/year)</th>
+                    <th>Diet</th>
+                    <th>Waste (kg CO₂/year)</th>
+                    <th>Total (kg CO₂/year)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emission in emissions %}
+                    <tr>
+                        <td>{{ emission.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ emission.transportation }}</td>
+                        <td>{{ emission.energy }}</td>
+                        <td>{{ emission.diet }}</td>
+                        <td>{{ emission.waste }}</td>
+                        <td>{{ emission.total_emission }}</td>
+                        <td><button class="close-btnt" aria-label="Close" onclick="deleteEmission({{ emission.id }})">x</button></td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No records found. Start calculating your carbon emissions!</p>
+    {% endif %}
+</div>
+<script
+    type="text/javascript"
+    src="{{ url_for('static', filename='emission.js') }}">
+</script>
+{% endblock %}

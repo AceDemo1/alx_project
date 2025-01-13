@@ -3,5 +3,10 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Welcome</h1>
+<div class="container">
+<h1>Welcome, {{ user.username }}</h1>
+<p>What do want to do today?</p>
+<p><a href="{{ url_for('views.notes') }}">Take a Note</a></p>
+<p><a href="{{ url_for('views.cal') }}">Simple Calculation</a></p>
+<p><a href="{{ url_for('views.carbon_emission') }}">Personal Carbon-Emission Calculation</a></p>
 {% endblock %}

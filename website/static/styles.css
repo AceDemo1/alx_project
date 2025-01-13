@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
@@ -38,6 +38,48 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Styled Notes Area */
+ul#notes {
+    list-style: none;
+    padding: 0;
+}
+
+.note-item {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.note-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.note-data {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+    word-wrap: break-word;
+    flex-grow: 1;
+}
+
+.note-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+.close-btn {
+    align-self: center;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -67,4 +109,285 @@ form button {
 
 form button:hover {
     background-color: #0056b3;
+}
+
+form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+/* Flash Message Container */
+.flash-messages {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Flash Message Box */
+.flash-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    animation: fadeIn 0.5s ease;
+}
+
+.flash-message.success {
+    background-color: #4CAF50; /* Green */
+}
+
+.flash-message.error {
+    background-color: #f44336; /* Red */
+}
+
+/* Close Button */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+.close-btn:hover {
+    color: #ddd;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade-Out Animation */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Fade-Out Class */
+.flash-message.fade-out {
+    animation: fadeOut 1s ease forwards;
+}
+
+/* Close Button for Notes */
+.note-item .close-btn {
+    color: rgba(0, 0, 0, 0.61); /* Black color for note close button */
+    font-size: 18px;
+}
+
+.note-item .close-btn:hover {
+    color: #555; /* Subtle hover effect for note close button */
+}
+
+/* Added a subtle highlight for notes list after submission */
+ul#notes::after {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(90deg, rgba(0,123,255,0.5), rgba(72,72,255,0.2));
+    border-radius: 4px;
+}
+
+/* Corrected Calculator Section */
+.calculator {
+    max-width: 400px;
+    margin: 50px auto; /* Centers the container horizontally */
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Aligns text and inline elements to the center */
+}
+
+/* General input and select field styling */
+.calculator input,
+.calculator select,
+.calculator button {
+    width: 80%; /* Uniform width for all inputs and buttons */
+    margin: 10px auto; /* Centers elements vertically */
+    padding: 10px; /* Padding for better usability */
+    font-size: 1rem; /* Consistent font size */
+    display: block; /* Ensures consistent centering of elements */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 4px; /* Rounded corners */
+    background: #fff; /* White background */
+    color: #333; /* Text color */
+    box-sizing: border-box; /* Consistent box-sizing */
+}
+
+/* Hover and focus states for inputs and select */
+.calculator input:focus,
+.calculator select:focus {
+    outline: none; /* Removes default outline */
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+}
+
+/* Button-specific styling */
+.calculator button {
+    background-color: #007bff; /* Primary button color */
+    color: white; /* White text */
+    border: none; /* Removes border */
+    cursor: pointer; /* Pointer cursor for buttons */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.calculator button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.result {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.suggestions h3 {
+    font-size: 1.3rem;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.suggestions ul {
+    list-style: disc;
+    padding-left: 20px;
+    color: #555;
+}
+
+.suggestions ul li {
+    margin-bottom: 10px;
+}
+
+ul#suggestions::after {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(90deg, rgba(0,123,255,0.5), rgba(72,72,255,0.2));
+    border-radius: 4px;
+}
+
+.history-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.history-link:hover {
+    text-decoration: underline;
+}
+
+.carbon-history {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.carbon-history h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.carbon-history p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+table td button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+table td button:hover {
+    background-color: #0056b3;
+}
+
+table th:last-child,
+table td:last-child {
+    display: transparent;
+}
+
+/* Responsive Table */
+@media screen and (max-width: 768px) {
+    .carbon-history {
+        padding: 10px;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
 }

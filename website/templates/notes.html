@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+<div class="container">
+<form method="POST">
+    <textarea name="note" id="note" placeholder="Write your note here..." rows="4" rows="4" cols="50" required></textarea>
+    <button type="submit">Add Note</button>
+</form>
+{% if user.notes %}
+<h2>Your Notes</h2>
+<ul id="notes">
+    {% for note in user.notes %}
+    <li class="note-item">
+        <p class="note-data">{{ note.data }}</p>
+        <small class="note-date">Created: {{ note.date.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+        <button class="close-btn" aria-label="Close" onclick="deleteNote({{ note.id }})">x</button>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
+<script
+    type="text/javascript"
+    src="{{ url_for('static', filename='index.js') }}">
+</script>
+{% endblock %}

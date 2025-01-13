@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Calculator{% endblock %}
+{% block content %}
+<div class="calculator">
+    <h2>Simple Calculator</h2>
+    <form method="POST" action="{{ url_for('views.cal') }}">
+        <input type="text" name="expression" placeholder="Enter your calculation (e.g., 5+3*2)" required>
+        <button type="submit">Calculate</button>
+    </form>
+    {% if result is not none %}
+        <div class="result">
+            <strong>Result:</strong> {{ result }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
